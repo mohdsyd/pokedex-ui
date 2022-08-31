@@ -1,0 +1,16 @@
+.card {
+    border: thin solid black;
+    justify-content: center;
+    height: 350px;
+    width: 250px;
+    font-size: calc(10px + 2vmin);
+    padding: 20px;
+    margin: 10px;
+
+}
+
+.app-logo {
+    align-items: center;
+    height: 20vmin;
+    pointer-events: none;
+  }
