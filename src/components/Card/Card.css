@@ -1,12 +1,15 @@
 .card {
     border: thin solid black;
+    box-shadow: 6px 6px 6px rgb(155, 155, 35);
     justify-content: center;
+    border-radius: 15px;
     height: 350px;
     width: 250px;
     font-size: calc(10px + 2vmin);
     padding: 20px;
     margin: 10px;
-
+    cursor: pointer;
+    align-items: center;
 }
 
 .app-logo {
