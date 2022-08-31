@@ -20,7 +20,8 @@ const Home: React.FC<IProps> = (props: IProps) => {
   
 
 
-    const data = [{name: "Card1"},{name: "Card2"},{name: "Card3"},{name: "Card4"},{name: "Card5"}, ]
+    const data = [{name: "Card1", checked: true},{name: "Card2", checked: false},{name: "Card3", 
+    checked: false},{name: "Card4", checked: false},{name: "Card5", checked: true}, ]
 
     const listItems = data.filter(card =>{
         if(searchValue === '')
@@ -28,13 +29,9 @@ const Home: React.FC<IProps> = (props: IProps) => {
         else if(card.name.toLowerCase().includes(searchValue.toLowerCase())){
             return card
         }
-    }).map((d,index) => {
-        return (
-        <Grid item xs={3}>
-            <Card name={d.name} />
-        </Grid>
-        )  
     });
+
+    const checkedItems = listItems.filter(card => card.checked)
 
     return (
     <div>
@@ -49,18 +46,30 @@ const Home: React.FC<IProps> = (props: IProps) => {
         </Tabs>
       </Box>
 
-                  <TabPanel value={value} index={0}>
+                <TabPanel value={value} index={0}>
                   <div className='scroll'>
-            
-                    
             <Grid container rowSpacing={1} spacing={0}>
-                {listItems?.length ? listItems : `No Cards to show`}
+                {listItems?.length ? listItems.map((d,index) => {
+                 return (
+                            <Grid item xs={3}>
+                                <Card name={d.name} />
+                            </Grid>
+                         )  
+                })  : `No Cards to show`}
             </Grid>
             </div>
 
                  </TabPanel>
             <TabPanel value={value} index={1}>
-            Item Two
+            <Grid container rowSpacing={1} spacing={0}>
+                {checkedItems?.length ? checkedItems.map((d,index) => {
+                 return (
+                            <Grid item xs={3}>
+                                <Card name={d.name} />
+                            </Grid>
+                         )  
+                })  : `No Cards to show`}
+            </Grid>
             </TabPanel>
             </Box>    
     </div>
