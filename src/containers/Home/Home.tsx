@@ -1,5 +1,6 @@
-import { Box, Grid, Tab, Tabs, useTheme } from '@mui/material';
+import { Box, Button, Grid, Tab, Tabs, useTheme } from '@mui/material';
 import * as React from 'react';
+import Header from '../../common/Header';
 import Card from '../../components/Card/Card';
 import TabPanel from '../TabPanel/TabPanel';
 import "./Home.css"
@@ -34,7 +35,8 @@ const Home: React.FC<IProps> = (props: IProps) => {
     const checkedItems = listItems.filter(card => card.checked)
 
     return (
-    <div>
+    <div className='home'>
+        <Header />
     <form>
     <input type="search" placeholder="Search..." onChange={event => setsearchValue(event.target.value)}/>
     </form>
@@ -61,6 +63,7 @@ const Home: React.FC<IProps> = (props: IProps) => {
 
                  </TabPanel>
             <TabPanel value={value} index={1}>
+                <Button>Empty Bag</Button>
             <Grid container rowSpacing={1} spacing={0}>
                 {checkedItems?.length ? checkedItems.map((d,index) => {
                  return (

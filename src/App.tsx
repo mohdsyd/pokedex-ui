@@ -1,15 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Header from './common/Header';
 import Home from './containers/Home/Home';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import Header from './common/Header';
+import PokemonDetails from './containers/PokemonDetails/PokemonDetails';
 
 function App() {
   return (
-    <div className='App'>
-      <Header />
-      <Home />
-    </div>
+    <BrowserRouter>
+    <Routes>
+      <Route path="/*" element={<Navigate replace to="/pokedex" />} />
+      <Route path="/pokedex" element={<Home />} />
+      <Route path="/:id" element={<PokemonDetails />} />
+      <Route path="/pokedex/:id" element={<PokemonDetails />} />
+    </Routes>
+    </BrowserRouter>
   );
 }
 
