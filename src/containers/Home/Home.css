@@ -13,3 +13,12 @@
     text-align: justify;
     padding: 20px;
 }
+
+input {
+    margin: 0;
+    padding: 7px 8px;
+    font-size: 14px;
+    color: black;
+    border: 2px solid #2d70b7;
+    border-radius: 15px;
+  }

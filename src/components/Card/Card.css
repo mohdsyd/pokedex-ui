@@ -12,8 +12,8 @@
     align-items: center;
 }
 
-.app-logo {
+.name {
+    display: flex;
     align-items: center;
-    height: 20vmin;
-    pointer-events: none;
-  }
+    justify-content: center;
+}

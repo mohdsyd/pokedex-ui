@@ -12,6 +12,7 @@ const Home: React.FC<IProps> = (props: IProps) => {
     
     const theme = useTheme();
     const [value, setValue] = React.useState(0);
+    const [searchValue, setsearchValue] = React.useState('')
   
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
       setValue(newValue);
@@ -21,7 +22,13 @@ const Home: React.FC<IProps> = (props: IProps) => {
 
     const data = [{name: "Card1"},{name: "Card2"},{name: "Card3"},{name: "Card4"},{name: "Card5"}, ]
 
-    const listItems = data.map((d,index) => {
+    const listItems = data.filter(card =>{
+        if(searchValue === '')
+            return card
+        else if(card.name.toLowerCase().includes(searchValue.toLowerCase())){
+            return card
+        }
+    }).map((d,index) => {
         return (
         <Grid item xs={3}>
             <Card name={d.name} />
@@ -31,8 +38,10 @@ const Home: React.FC<IProps> = (props: IProps) => {
 
     return (
     <div>
-        <input></input>
-        <Box sx={{ width: '100%' }}>
+    <form>
+    <input type="search" placeholder="Search..." onChange={event => setsearchValue(event.target.value)}/>
+    </form>
+            <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange}>
           <Tab label="All"  />
@@ -45,7 +54,7 @@ const Home: React.FC<IProps> = (props: IProps) => {
             
                     
             <Grid container rowSpacing={1} spacing={0}>
-                {listItems}
+                {listItems?.length ? listItems : `No Cards to show`}
             </Grid>
             </div>
 
