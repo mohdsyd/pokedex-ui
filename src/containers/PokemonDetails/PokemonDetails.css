@@ -1,39 +1,68 @@
-.detail-container {
-    display: block;
-    width: 100%;
-}
-
-.detail-info {
-    margin: 40px;
-    left: 0;
-    position: relative;
-}
-
-.image-container {
-    height: 200px;
-    width: 10%;
-    border-style: solid;
-    border-width: 1px;
-    overflow: hidden;
-    left: 0;
-    margin: 40px;
-    position: relative;
-}
-
-.image-lg-container {
-    display: flex;
-    border: thin solid black;
-    float: right;
-    border-radius: 15px;
-    height: 50vh;
-    width: 50%;
-    font-size: calc(10px + 2vmin);
-    padding: 20px;
-    margin-left: 200px;
-}
-
 .name {
+    top: 30%;
+    right: 54%;
+    left: 0;
+    position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
+.detail-heigth {
+    top: 40%;
+    right: 84%;
+    position: absolute;
+}
+
+.detail-weigth {
+    top: 44%;
+    right: 83%;
+    position: absolute;
+}
+.detail-in-bag {
+    top: 48%;
+    right: 84%;
+    position: absolute;
+}
+
+.description {
+    width: 800;
+    top: 52%;
+    right: 64%;
+    left: 40;
+    padding-left: 200px;
+    position: absolute;
+}
+
+.image-container {
+    position: absolute;
+    top: 20%;
+    left:20%;
+}
+
+.ability {
+    position: absolute;
+    top: 70%;
+    left:50%;
+    display: flex;
+    right: 0;
+}
+
+.image-lg-container {
+    position: absolute;
+    top: 20%;
+    left:50%;
+    display: flex;
+    right: 0;
+}
+
+.abilities {
+    top: 78%;
+    right: 84%;
+    position: absolute;
+   
+}
+
+.ability-i{
+    padding: 10px;
+} 

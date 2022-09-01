@@ -19,7 +19,7 @@ const Card: React.FC<IProps> = (props: IProps) => {
     return (
   <div onClick={navigateToDetails} className='card'>
       <img  className='img' src={props.img}></img>
-     <strong className='name'> {props.name}</strong>
+     <strong className='card-name'> {props.name}</strong>
   </div>  
 )};
 

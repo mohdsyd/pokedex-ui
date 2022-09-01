@@ -1,4 +1,6 @@
+import { Typography } from '@mui/material';
 import * as React from 'react';
+import { useParams } from 'react-router-dom';
 import Header from '../../common/Header';
 import './PokemonDetails.css'
 
@@ -6,36 +8,62 @@ interface IProps {
   name?: string;
 }
 
-const PokemonDetails: React.FC<IProps> = (props: IProps) => (
-    <div>
+const PokemonDetails: React.FC<IProps> = (props: IProps) => {
+    const {name} = useParams();
+    const[pokemon, setPokemon] = React.useState({} as any)
+
+    const fetchPokemon = async () => {
+    const pokemonData = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
+    const data:any = await pokemonData.json()
+    setPokemon(data)
+  }
+
+    React.useEffect(() => {
+      fetchPokemon()
+    }, [])
+
+    return (
+    <div className='container'>
         <Header />
         <div className='detail-container'>
-            
             <div>
-            <div className='image-container'>
-                <img src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png'></img>
-            </div>
-            <div className='detail-info'>
-                Name
-            </div>
-            <div className='detail-info'>
-                Heigth: {10}
-            </div>
-            <div className='detail-info'>
-                Weight: {100}
-            </div>
-            <div className='detail-info'>
-                In bag <input type="checkbox"></input>
-            </div>
-            </div>
+            <img className='image-container' src={pokemon?.sprites?.front_default}></img>
             <div className='image-lg-container'>
-            <img src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg'></img>
+            <img src={pokemon?.sprites?.other?.dream_world?.front_default}></img>
             </div>
-            
-
+            <div className='name'>
+                {pokemon?.name?.toUpperCase()}
+            </div>
+            <div className='detail-heigth'>
+                Heigth: {pokemon?.height}
+            </div>
+            <div className='detail-weigth'>
+                Weight: {pokemon?.weight}
+            </div>
+            <div className='detail-in-bag'>
+                In bag 
+            </div>
+            <div className='description'>
+            <Typography >Lorem ipsum dolor sit amet. Ab omnis illo qui delectus aliquid est eaque molestiae. Quo dolores fugiat a iusto autem in rerum fugiat vel illo deleniti aut eius sunt id consequatur molestias qui fugit dolorem!
+            </Typography>
+            </div>
+            <div className='ability'>
+            <Typography >ABILITIES
+            </Typography>
+            </div>
+            <div className='abilities'>
+            {pokemon?.abilities?.flatMap(ability => ability?.ability?.name).map((d,index) => {
+                 return (
+                    <div className='ability-i'>
+                                {d}
+                     </div>
+                         )  
+                })}
+            </div>
+    </div>  
         </div>
     </div>
-);
+)};
 
 PokemonDetails.defaultProps = {
   name: 'world',

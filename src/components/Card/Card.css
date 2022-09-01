@@ -12,7 +12,7 @@
     align-items: center;
 }
 
-.name {
+.card-name {
     display: flex;
     align-items: center;
     justify-content: center;
