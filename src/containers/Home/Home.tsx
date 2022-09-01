@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Tab, Tabs, useTheme } from "@mui/material";
+import { Box, Button, Grid, Tab, Tabs } from "@mui/material";
 import * as React from "react";
 import Header from "../../common/Header";
 import Card from "../../components/Card/Card";
@@ -14,28 +14,13 @@ const Home: React.FC = () => {
   };
 
   const [allPokemons, setAllPokemons] = React.useState([] as any);
-  const fetchPokemons = async () => {
-    const pokemons = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
-    const data = await pokemons.json();
-
-    async function fetchPokemonDetails(results: any) {
-      for (const result of results) {
-        const pokemonData = await fetch(
-          `https://pokeapi.co/api/v2/pokemon/${result.name}`
-        );
-        const data = await pokemonData.json();
-        setAllPokemons((allPokemons) => [...allPokemons, data]);
-        allPokemons.sort((a: any, b: any): any => a.id - b.id);
-      }
-    }
-    fetchPokemonDetails(data.results);
-  };
 
   const listItems = allPokemons.filter((card) => {
     if (searchValue === "") return card;
     else if (card.name.toLowerCase().includes(searchValue.toLowerCase())) {
       return card;
     }
+    return false;
   });
 
   let checkedItems = listItems.filter(
@@ -49,6 +34,24 @@ const Home: React.FC = () => {
   };
 
   React.useEffect(() => {
+    const fetchPokemons = async () => {
+      const pokemons = await fetch(
+        "https://pokeapi.co/api/v2/pokemon?limit=151"
+      );
+      const data = await pokemons.json();
+
+      async function fetchPokemonDetails(results: any) {
+        for (const result of results) {
+          const pokemonData = await fetch(
+            `https://pokeapi.co/api/v2/pokemon/${result.name}`
+          );
+          const data = await pokemonData.json();
+          setAllPokemons((allPokemons) => [...allPokemons, data]);
+          allPokemons.sort((a: any, b: any): any => a.id - b.id);
+        }
+      }
+      fetchPokemonDetails(data.results);
+    };
     fetchPokemons();
   }, []);
 
@@ -76,8 +79,9 @@ const Home: React.FC = () => {
               {listItems?.length
                 ? listItems.map((d, index) => {
                     return (
-                      <Grid item xs={3}>
+                      <Grid item xs={3} key={index}>
                         <Card
+                          key={index}
                           name={d.name}
                           img={d.sprites.other.dream_world.front_default}
                         />
@@ -94,8 +98,9 @@ const Home: React.FC = () => {
             {checkedItems?.length
               ? checkedItems.map((d, index) => {
                   return (
-                    <Grid item xs={3}>
+                    <Grid item xs={3} key={index}>
                       <Card
+                        key={index}
                         name={d.name}
                         img={d.sprites.other.dream_world.front_default}
                       />

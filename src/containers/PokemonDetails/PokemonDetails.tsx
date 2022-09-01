@@ -23,19 +23,18 @@ const PokemonDetails: React.FC<IProps> = (props: IProps) => {
     setIsChecked((current) => !current);
   };
 
-  const fetchPokemon = async () => {
-    const pokemonData = await fetch(
-      `https://pokeapi.co/api/v2/pokemon/${name}`
-    );
-    const data: any = await pokemonData.json();
-    const getSavedPokemon = localStorage.getItem(data.name) === "true";
-    setIsChecked(getSavedPokemon);
-    setPokemon(data);
-  };
-
   React.useEffect(() => {
+    const fetchPokemon = async () => {
+      const pokemonData = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${name}`
+      );
+      const data: any = await pokemonData.json();
+      const getSavedPokemon = localStorage.getItem(data.name) === "true";
+      setIsChecked(getSavedPokemon);
+      setPokemon(data);
+    };
     fetchPokemon();
-  }, []);
+  }, [name]);
 
   return (
     <div className="container">
@@ -43,11 +42,13 @@ const PokemonDetails: React.FC<IProps> = (props: IProps) => {
       <div className="detail-container">
         <div>
           <img
+            alt="small"
             className="image-container"
             src={pokemon?.sprites?.front_default}
           ></img>
           <div className="image-lg-container">
             <img
+              alt="large"
               src={pokemon?.sprites?.other?.dream_world?.front_default}
             ></img>
           </div>
@@ -68,7 +69,11 @@ const PokemonDetails: React.FC<IProps> = (props: IProps) => {
             {pokemon?.types
               ?.flatMap((type) => type?.type?.name)
               .map((d, index) => {
-                return <span className="ability-i">{d}</span>;
+                return (
+                  <span key={index} className="ability-i">
+                    {d}
+                  </span>
+                );
               })}
           </div>
 
@@ -84,7 +89,11 @@ const PokemonDetails: React.FC<IProps> = (props: IProps) => {
             {pokemon?.abilities
               ?.flatMap((ability) => ability?.ability?.name)
               .map((d, index) => {
-                return <div className="ability-i">{d}</div>;
+                return (
+                  <div key={index} className="ability-i">
+                    {d}
+                  </div>
+                );
               })}
           </div>
         </div>

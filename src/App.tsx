@@ -1,6 +1,5 @@
 import Home from "./containers/Home/Home";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import Header from "./common/Header";
 import PokemonDetails from "./containers/PokemonDetails/PokemonDetails";
 
 function App() {
