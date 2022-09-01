@@ -28,3 +28,18 @@ input {
     border: 2px solid #2d70b7;
     border-radius: 15px;
   }
+
+  .search {
+    padding: 50px;
+  }
+
+  .tabs {
+    display: flex;
+    align-items: center;
+    float: center;
+    border: 2px solid #2d70b7;
+    margin-top: 20px;
+    margin-left: 750px;
+    width: 180px;
+
+  }

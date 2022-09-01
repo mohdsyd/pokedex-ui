@@ -19,12 +19,27 @@ const Home: React.FC<IProps> = (props: IProps) => {
       setValue(newValue);
     };
   
+    const[allPokemons, setAllPokemons] = React.useState([] as any)
+    const fetchPokemons = async () => {
+      const pokemons = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
+      const data = await pokemons.json()
 
+    async function fetchPokemonDetails(results:any)  {
+      for( const result of results){
+        const pokemonData = await fetch(`https://pokeapi.co/api/v2/pokemon/${result.name}`)
+        const data =  await pokemonData.json()
+        setAllPokemons( allPokemons => [...allPokemons, data])
+        allPokemons.sort((a:any, b:any):any => a.id - b.id)
+      }
+    }
+    fetchPokemonDetails(data.results)
+  }
 
-    const data = [{name: "Card1", checked: true},{name: "Card2", checked: false},{name: "Card3", 
-    checked: false},{name: "Card4", checked: false},{name: "Card5", checked: true}, ]
+    React.useEffect(() => {
+      fetchPokemons()
+    }, [])
 
-    const listItems = data.filter(card =>{
+    const listItems = allPokemons.filter(card =>{
         if(searchValue === '')
             return card
         else if(card.name.toLowerCase().includes(searchValue.toLowerCase())){
@@ -37,16 +52,16 @@ const Home: React.FC<IProps> = (props: IProps) => {
     return (
     <div className='home'>
         <Header />
-    <form>
-    <input type="search" placeholder="Search..." onChange={event => setsearchValue(event.target.value)}/>
-    </form>
             <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange}>
+        <Tabs className='tabs' value={value} onChange={handleChange}>
           <Tab label="All"  />
           <Tab label="Bag" />
         </Tabs>
       </Box>
+      <form className='search'>
+    <input type="search" placeholder="Search..." onChange={event => setsearchValue(event.target.value)}/>
+    </form>
 
                 <TabPanel value={value} index={0}>
                   <div className='scroll'>
@@ -54,7 +69,8 @@ const Home: React.FC<IProps> = (props: IProps) => {
                 {listItems?.length ? listItems.map((d,index) => {
                  return (
                             <Grid item xs={3}>
-                                <Card name={d.name} />
+                                <Card name={d.name}
+                                img={d.sprites.other.dream_world.front_default} />
                             </Grid>
                          )  
                 })  : `No Cards to show`}

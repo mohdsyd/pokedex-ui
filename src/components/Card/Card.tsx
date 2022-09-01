@@ -1,17 +1,27 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Card.css'
 
 interface IProps {
     img?: string;
     name?: string;
+    id?: number;
 }
 
-const Card: React.FC<IProps> = (props: IProps) => (
-  <div onClick={()=>{console.log('here')}}className='card'>
-    <img src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg'></img>
-     <h1 className='name'> {props.name}</h1>
+const Card: React.FC<IProps> = (props: IProps) => {
+
+    const navigate = useNavigate();
+
+    const navigateToDetails = () => {
+        navigate(`/pokedex/${props.name}`);
+    };
+
+    return (
+  <div onClick={navigateToDetails} className='card'>
+      <img  className='img' src={props.img}></img>
+     <strong className='name'> {props.name}</strong>
   </div>  
-);
+)};
 
 Card.defaultProps = {
   name: 'world',

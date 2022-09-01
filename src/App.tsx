@@ -9,8 +9,7 @@ function App() {
     <Routes>
       <Route path="/*" element={<Navigate replace to="/pokedex" />} />
       <Route path="/pokedex" element={<Home />} />
-      <Route path="/:id" element={<PokemonDetails />} />
-      <Route path="/pokedex/:id" element={<PokemonDetails />} />
+      <Route path="/pokedex/:name" element={<PokemonDetails />} />
     </Routes>
     </BrowserRouter>
   );
