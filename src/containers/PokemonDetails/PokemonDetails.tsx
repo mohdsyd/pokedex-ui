@@ -12,9 +12,24 @@ const PokemonDetails: React.FC<IProps> = (props: IProps) => {
     const {name} = useParams();
     const[pokemon, setPokemon] = React.useState({} as any)
 
+    const [isChecked, setIsChecked] = React.useState(false);
+
+    const handleChange = event => {
+        if (event.target.checked) {
+          console.log('Checkbox is  checked');
+          localStorage.setItem(pokemon?.name, "true")
+        } else {
+          localStorage.setItem(pokemon?.name, "false")
+        }
+        setIsChecked(current => !current);
+      };
+
     const fetchPokemon = async () => {
     const pokemonData = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
     const data:any = await pokemonData.json()
+    const getSavedPokemon = localStorage.getItem(data.name) === "true"
+    console.log(data.name, getSavedPokemon)
+    setIsChecked(getSavedPokemon)
     setPokemon(data)
   }
 
@@ -41,11 +56,25 @@ const PokemonDetails: React.FC<IProps> = (props: IProps) => {
                 Weight: {pokemon?.weight}
             </div>
             <div className='detail-in-bag'>
-                In bag 
+              In bag <input type="checkbox"
+                        checked={isChecked}
+                        onChange={handleChange}
+                        id="subscribe"
+                        name="subscribe"></input>
             </div>
+            <div className='types'>
+            {pokemon?.types?.flatMap(type => type?.type?.name).map((d,index) => {
+                 return (
+                    <span className='ability-i'>
+                                {d}
+                     </span>
+                         )  
+                })}
+            </div>
+
             <div className='description'>
-            <Typography >Lorem ipsum dolor sit amet. Ab omnis illo qui delectus aliquid est eaque molestiae. Quo dolores fugiat a iusto autem in rerum fugiat vel illo deleniti aut eius sunt id consequatur molestias qui fugit dolorem!
-            </Typography>
+            <div >{`Lorem ipsum dolor sit amet. Ab omnis illo qui delectus aliquid est eaque molestiae. Quo dolores fugiat a iusto autem in rerum fugiat vel illo deleniti aut eius sunt id consequatur molestias qui fugit dolorem!`}
+            </div>
             </div>
             <div className='ability'>
             <Typography >ABILITIES

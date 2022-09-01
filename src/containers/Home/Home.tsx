@@ -35,19 +35,28 @@ const Home: React.FC<IProps> = (props: IProps) => {
     fetchPokemonDetails(data.results)
   }
 
+  const listItems = allPokemons.filter(card =>{
+    if(searchValue === '')
+        return card
+    else if(card.name.toLowerCase().includes(searchValue.toLowerCase())){
+        return card
+    }
+});
+
+  let checkedItems = listItems.filter(card => localStorage.getItem(card.name) === 'true')
+
+   const onClear = () => {
+
+    localStorage.clear()
+
+    checkedItems = []    
+  };
+
     React.useEffect(() => {
       fetchPokemons()
     }, [])
 
-    const listItems = allPokemons.filter(card =>{
-        if(searchValue === '')
-            return card
-        else if(card.name.toLowerCase().includes(searchValue.toLowerCase())){
-            return card
-        }
-    });
 
-    const checkedItems = listItems.filter(card => card.checked)
 
     return (
     <div className='home'>
@@ -79,13 +88,14 @@ const Home: React.FC<IProps> = (props: IProps) => {
 
                  </TabPanel>
             <TabPanel value={value} index={1}>
-                <Button>Empty Bag</Button>
+                <Button onClick={onClear}>Empty Bag</Button>
             <Grid container rowSpacing={1} spacing={0}>
                 {checkedItems?.length ? checkedItems.map((d,index) => {
                  return (
-                            <Grid item xs={3}>
-                                <Card name={d.name} />
-                            </Grid>
+                  <Grid item xs={3}>
+                     <Card name={d.name}
+                       img={d.sprites.other.dream_world.front_default} />
+                 </Grid>
                          )  
                 })  : `No Cards to show`}
             </Grid>

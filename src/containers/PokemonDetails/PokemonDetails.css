@@ -26,11 +26,10 @@
 }
 
 .description {
-    width: 800;
-    top: 52%;
-    right: 64%;
-    left: 40;
-    padding-left: 200px;
+    top: 58%;
+    right: 76%;
+    width: 200px;
+    margin-left: 70px;
     position: absolute;
 }
 
@@ -42,7 +41,7 @@
 
 .ability {
     position: absolute;
-    top: 70%;
+    top: 75%;
     left:50%;
     display: flex;
     right: 0;
@@ -56,8 +55,14 @@
     right: 0;
 }
 
+.types {
+    top: 52%;
+    right: 81%;
+    position: absolute;
+}
+
 .abilities {
-    top: 78%;
+    top: 84%;
     right: 84%;
     position: absolute;
    
