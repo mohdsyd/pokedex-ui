@@ -1,73 +1,72 @@
 .name {
-    top: 30%;
-    right: 54%;
-    left: 0;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  top: 30%;
+  right: 54%;
+  left: 0;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .detail-heigth {
-    top: 40%;
-    right: 84%;
-    position: absolute;
+  top: 40%;
+  right: 84%;
+  position: absolute;
 }
 
 .detail-weigth {
-    top: 44%;
-    right: 83%;
-    position: absolute;
+  top: 44%;
+  right: 83%;
+  position: absolute;
 }
 .detail-in-bag {
-    top: 48%;
-    right: 84%;
-    position: absolute;
+  top: 48%;
+  right: 84%;
+  position: absolute;
 }
 
 .description {
-    top: 58%;
-    right: 76%;
-    width: 200px;
-    margin-left: 70px;
-    position: absolute;
+  top: 58%;
+  right: 76%;
+  width: 200px;
+  margin-left: 70px;
+  position: absolute;
 }
 
 .image-container {
-    position: absolute;
-    top: 20%;
-    left:20%;
+  position: absolute;
+  top: 20%;
+  left: 20%;
 }
 
 .ability {
-    position: absolute;
-    top: 75%;
-    left:50%;
-    display: flex;
-    right: 0;
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  display: flex;
+  right: 0;
 }
 
 .image-lg-container {
-    position: absolute;
-    top: 20%;
-    left:50%;
-    display: flex;
-    right: 0;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  display: flex;
+  right: 0;
 }
 
 .types {
-    top: 52%;
-    right: 81%;
-    position: absolute;
+  top: 52%;
+  right: 81%;
+  position: absolute;
 }
 
 .abilities {
-    top: 84%;
-    right: 84%;
-    position: absolute;
-   
+  top: 84%;
+  right: 84%;
+  position: absolute;
 }
 
-.ability-i{
-    padding: 10px;
-} 
+.ability-i {
+  padding: 10px;
+}
