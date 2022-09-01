@@ -18,7 +18,10 @@ const Card: React.FC<IProps> = (props: IProps) => {
   return (
     <div onClick={navigateToDetails} className="card">
       <img className="card-img" alt="card" src={props.img}></img>
-      <strong className="card-name"> {props.name}</strong>
+      <strong data-testid="pokemon-name" className="card-name">
+        {" "}
+        {props.name}
+      </strong>
     </div>
   );
 };
